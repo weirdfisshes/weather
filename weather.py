@@ -1,5 +1,4 @@
 from enum import Enum
-from types import CoroutineType
 from typing import NamedTuple
 
 from location import Coordinates
@@ -14,7 +13,7 @@ class Weather(NamedTuple):
     temp: Celsius
     type: TypeOfWeather
 
-def get_weather(coordinate: Coordinates) -> Weather:
+def get_weather(coordinates: Coordinates) -> Weather:
     return Weather(
         temp = 20,
         type = TypeOfWeather.CLEAR
