@@ -9,7 +9,7 @@ import urllib.request
 from urllib.error import URLError
 
 from location import Coordinates
-from exceptions import ApiServiceError
+from exceptions import GetWeatherFailed
 import settings
 
 Celsius: TypeAlias = float
@@ -45,13 +45,13 @@ def _get_openweather_response(latitude: float, longitude: float) -> str:
     try:
         return urllib.request.urlopen(url).read()
     except URLError:
-        raise ApiServiceError
+        raise GetWeatherFailed
 
 def _parse_openweather_response(openweather_response: str) -> Weather:
     try:
         openweather_dict = json.loads(openweather_response)
     except JSONDecodeError:
-        raise ApiServiceError
+        raise GetWeatherFailed
     return Weather(
         temperature=_parse_temperature(openweather_dict),
         weather_type=_parse_weather_type(openweather_dict),
@@ -67,7 +67,7 @@ def _parse_weather_type(openweather_dict: dict) -> WeatherType:
     try:
         weather_type_id = str(openweather_dict["weather"][0]["id"])
     except (IndexError, KeyError):
-        raise ApiServiceError
+        raise GetWeatherFailed
     weather_types = {
         "1": WeatherType.THUNDERSTORM,
         "3": WeatherType.DRIZZLE,
@@ -80,7 +80,7 @@ def _parse_weather_type(openweather_dict: dict) -> WeatherType:
     for _id, _weather_type in weather_types.items():
         if weather_type_id.startswith(_id):
             return _weather_type
-    raise ApiServiceError
+    raise GetWeatherFailed
 
 def _parse_sun_time(
         openweather_dict: dict,
@@ -91,7 +91,7 @@ def _parse_city(openweather_dict: dict) -> str:
     try:
         return openweather_dict["name"]
     except KeyError:
-        raise ApiServiceError
+        raise GetWeatherFailed
 
 
 if __name__ == "__main__":

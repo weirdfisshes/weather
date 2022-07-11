@@ -1,6 +1,8 @@
 from typing import NamedTuple
+
 import geocoder
 
+from exceptions import GetLocationFailed
 
 class Coordinates(NamedTuple):
     latitude: float
@@ -8,9 +10,14 @@ class Coordinates(NamedTuple):
 
 
 def get_location() -> Coordinates:
-    location = geocoder.ip('me')
-    latitude = location.latlng[0]
-    longitude = location.latlng[1]
-    return Coordinates(latitude=latitude, longitude=longitude)
+    try:
+        location = geocoder.ip('me')
+        latitude = location.latlng[0]
+        longitude = location.latlng[1]
+        return Coordinates(latitude=latitude, longitude=longitude)
+    except:
+        raise GetLocationFailed
 
 
+if __name__ == "__main__":
+    print('Для работы с программой запустите файл main.py')

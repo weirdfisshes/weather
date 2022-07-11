@@ -1,5 +1,5 @@
-class CantGetCoordinates(Exception):
+class GetLocationFailed(Exception):
     """Program can't get current GPS coordinates"""
 
-class ApiServiceError(Exception):
+class GetWeatherFailed(Exception):
     """Program can't current weather"""
