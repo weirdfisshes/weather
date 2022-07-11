@@ -1,5 +1,5 @@
 class GetLocationFailed(Exception):
-    """Program can't get current GPS coordinates"""
+    """Не удалось получить данные о вашем местоположении"""
 
 class GetWeatherFailed(Exception):
-    """Program can't current weather"""
+    """Не удалось получить данные о погоде от OpenWeather"""
