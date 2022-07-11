@@ -9,12 +9,4 @@ def format_weather(weather: Weather) -> str:
 
 
 if __name__ == "__main__":
-    from datetime import datetime
-    from weather_api import WeatherType
-    print(format_weather(Weather(
-        temperature=25,
-        weather_type=WeatherType.CLEAR,
-        sunrise=datetime.fromisoformat("2022-05-03 04:00:00"),
-        sunset=datetime.fromisoformat("2022-05-03 20:25:00"),
-        city="Moscow"
-    )))
+    print('Для работы с программой запустите файл main.py')

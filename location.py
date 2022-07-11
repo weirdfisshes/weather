@@ -1,11 +1,16 @@
 from typing import NamedTuple
-import subprocess as sp
-import re
-import time
+import geocoder
+
 
 class Coordinates(NamedTuple):
     latitude: float
     longitude: float
 
+
 def get_location() -> Coordinates:
-    return Coordinates(latitude=10, longitude=20)
+    location = geocoder.ip('me')
+    latitude = location.latlng[0]
+    longitude = location.latlng[1]
+    return Coordinates(latitude=latitude, longitude=longitude)
+
+

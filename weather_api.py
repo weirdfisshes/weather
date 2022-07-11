@@ -95,4 +95,4 @@ def _parse_city(openweather_dict: dict) -> str:
 
 
 if __name__ == "__main__":
-    print(get_weather(Coordinates(latitude=55.7, longitude=37.6)))
+    print('Для работы с программой запустите файл main.py')
